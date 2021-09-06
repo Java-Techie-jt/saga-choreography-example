@@ -1,0 +1,14 @@
+spring:
+  cloud:
+    stream:
+      function:
+        definition : paymentProcessor
+      bindings:
+        paymentProcessor-in-0 :
+          destination: order-event
+        paymentProcessor-out-0:
+          destination: payment-event
+
+
+server:
+  port: 8082
