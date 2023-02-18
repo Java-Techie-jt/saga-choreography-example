@@ -62,9 +62,9 @@ public class PaymentService {
 
         userTransactionRepository.findById(orderEvent.getOrderRequestDto().getOrderId())
                 .ifPresent(ut->{
+                    userBalanceRepository.findById(ut.getUserId())
+                        .ifPresent(ub -> ub.setPrice(ub.getPrice() + ut.getAmount()));
                     userTransactionRepository.delete(ut);
-                    userTransactionRepository.findById(ut.getUserId())
-                            .ifPresent(ub->ub.setAmount(ub.getAmount()+ut.getAmount()));
                 });
     }
 }
